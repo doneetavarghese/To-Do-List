@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TODO List</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .completed {
+      text-decoration: line-through;
+    }
+    body{
+        background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8GT8sgMtfIDBslQdYmDHkIcTvoqFxjxkgcw&usqp=CAU");
+        background-repeat: no-repeat;
+    background-size: cover;}
+  </style>
+</head>
+<body>
+  <div class="container mt-5">
+    <h1 style="color: darkblue;font-family: cursive;" class="text-center my-5">TODO List</h1>
+    <div class="input-group mb-3">
+      <input style="color:crimson;font-size: larger;font-weight: bold;" type="text" id="todoInput" class="form-control" placeholder="Add new task">
+      <button class="btn btn-primary" type="button" onclick="addTodo()">Add</button>
+    </div>
+    <ul id="todoList" class="list-group">
+    </ul>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Function to add new todo item
+    function addTodo() {
+      var todoInput = document.getElementById('todoInput');
+      var todoText = todoInput.value.trim();
+      if (todoText !== '') {
+        var todoList = document.getElementById('todoList');
+        var li = document.createElement('li');
+        li.className = 'list-group-item';
+        li.innerHTML = `
+          <input  type="checkbox" onchange="toggleCompleted(this)">
+          <span style="color:darkblue;font-size: larger;font-weight: bold;" >${todoText}</span>
+          <button type="button" class="btn btn-danger btn-sm float-end" onclick="removeTodo(this)">Remove</button>
+        `;
+        todoList.appendChild(li);
+        todoInput.value = '';
+      }
+    }
+
+    // Function to toggle completed status
+    function toggleCompleted(checkbox) {
+      var span = checkbox.nextElementSibling;
+      if (checkbox.checked) {
+        span.classList.add('completed');
+      } else {
+        span.classList.remove('completed');
+      }
+    }
+
+    // Function to remove todo item
+    function removeTodo(button) {
+      var li = button.parentElement;
+      li.remove();
+    }
+  </script>
+</body>
+</html>
+
+
+
+
+
+
